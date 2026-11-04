@@ -23,6 +23,7 @@
 
 #missingemailstext{
     color:green;
+    word-break: break-all; 
 }
  
  .ms-welcome__header {
@@ -107,7 +108,5 @@ button{
 
   #searchmissingemailstitle{
     color:rgb(0, 55, 255);
-      overflow-wrap: break-word; /* breaks long words only if they'd overflow */
-  word-wrap: break-word;     /* older alias, for legacy browsers */
 }
 
