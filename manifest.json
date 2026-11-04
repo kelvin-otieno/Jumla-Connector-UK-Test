@@ -4,8 +4,8 @@
     "manifestVersion": "1.17",
     "version": "1.0.1",
     "name": {
-        "short": "Jumla Connector",
-        "full": "Jumla Connector"
+        "short": "Jumla Connector UK Test",
+        "full": "Jumla Connector UK Test"
     },
     "description": {
         "short": "Outlook Add-In to push emails to Jumla.",
@@ -37,7 +37,7 @@
         }
     },
     "validDomains": [
-        "contoso.com"
+        "amref.com"
     ],
     "extensions": [
         {
@@ -104,7 +104,7 @@
                             "groups": [
                                 {
                                     "id": "msgReadGroup",
-                                    "label": "Contoso Add-in",
+                                    "label": "Jumla Connector",
                                     "icons": [
                                         {
                                             "size": 16,

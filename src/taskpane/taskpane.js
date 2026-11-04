@@ -12,6 +12,60 @@
 //       document.getElementById("run").onclick = run;
 //     }
 //   });
+
+
+function loadMissingEmails() {
+  Office.onReady((info) => {
+    if (info.host === Office.HostType.Outlook) {
+      searchmissingemailsapi = "https://a26068ef5a2445e0ad4ddab310c157.f9.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/04/workflows/2fea241966174c12944f9a3b88ac1a0c/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=gUZ6iTRC3iqxdlbG6DEaEoCucGwwk496JWLgiwicmQE";
+      const item = Office.context.mailbox.item;
+          
+      const missingemailstext = document.getElementById("missingemailstext");
+        
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      const from = item.from;
+      const to = item.to;
+      const cc = item.cc;
+      const raw = JSON.stringify({
+        from: from,
+        to: to,
+        cc: cc
+      });
+
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      fetch(
+        searchmissingemailsapi,
+        requestOptions
+      )
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.missingemails.length > 0) {
+          const missingemailstitle = document.getElementById("missingemailstitle");
+          missingemailstitle.style.display = "block";
+          missingemailstext.innerText = result.missingemails;
+        }
+      })
+      .catch((error) => console.error(error))
+      .finally(() => {
+          const searchmissingemailstitle = document.getElementById("searchmissingemailstitle");
+          searchmissingemailstitle.style.display = "none";
+
+          const trackbutton = document.getElementById("run");
+          trackbutton.style.cursor = "pointer";
+          trackbutton.style.pointerEvents = "auto";
+          trackbutton.style.opacity = "1.0";
+      });
+
+    }
+  });
+}
   
  async function run() {
     /**
@@ -72,7 +126,15 @@
         )
           .then((response) => {
             if (response.ok) {
-              let label = document.createElement("b").appendChild(document.createTextNode("Email successfully created."));
+              const label = document.createElement("b");
+
+              const link = document.createElement("a");
+              link.href = "https://example.com/emails/123"; // where "Email" should point
+              link.textContent = "Email";
+
+              label.appendChild(link);
+              label.appendChild(document.createTextNode(" successfully created."));
+              // let label = document.createElement("b").appendChild(document.createTextNode("Email successfully created."));
               insertAt.appendChild(label);
               document.getElementById("run").innerHTML = "Track in Jumla";
               if (item.itemType === Office.MailboxEnums.ItemType.Message) {

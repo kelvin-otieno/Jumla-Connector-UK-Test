@@ -8,7 +8,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Jumla Task Pane Add-in</title>
+    <title>Jumla Connector</title>
 
     <!-- Office JavaScript API -->
     <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
@@ -21,7 +21,7 @@
     <link href="taskpane.css" rel="stylesheet" type="text/css" />
 </head>
 
-<body class="ms-font-m ms-welcome ms-Fabric">
+<body class="ms-font-m ms-welcome ms-Fabric" onload="loadMissingEmails()">
     <header class="ms-welcome__header ms-bgColor-neutralLighter">
         <img width="152" height="90" src="../../assets/amreflogo.png" alt="Amref Health Africa" title="Amref Health Africa" />
         <h1 class="ms-font-su">Welcome</h1>
@@ -51,6 +51,9 @@
         </div> -->
         <button type="button" onclick="run()" id="run">Track in Jumla</button>
         <p><label id="item-subject"></label></p>
+        <p id="searchmissingemailstitle"><b>Searching Jumla for missing emails...</b></p>
+        <p id="missingemailstitle">Below emails are missing in Jumla:</p>
+        <p id="missingemailstext"></p>
     </main>
 </body>
 
