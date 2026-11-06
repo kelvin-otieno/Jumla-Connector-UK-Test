@@ -126,10 +126,12 @@ function loadMissingEmails() {
         )
           .then((response) => {
             if (response.ok) {
+              response.json().then((data) => {
+                const emailId = data.emailid;
               const label = document.createElement("b");
-
+              label.style.color = "green";
               const link = document.createElement("a");
-              link.href = "https://example.com/emails/123"; // where "Email" should point
+              link.href = `https://amrefhealthafrica.crm4.dynamics.com/main.aspx?appid=f9596913-e439-4915-98be-5d633d5482b4&newWindow=true&pagetype=entityrecord&etn=email&id=${emailId}`; // where "Email" should point
               link.textContent = "Email";
 
               label.appendChild(link);
@@ -153,6 +155,8 @@ function loadMissingEmails() {
                   console.error("Error: ", error);
                 }
               }
+              });
+
             }
           })
           .then((result) => console.log(result))
